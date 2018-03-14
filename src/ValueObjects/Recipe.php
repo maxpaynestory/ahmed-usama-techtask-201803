@@ -20,7 +20,7 @@ class Recipe {
      */
     protected $ingredientTitles;
     protected $title;
-
+    
     function __construct($title, Array $ingredientTitles) {
         
         $this->title = $title;

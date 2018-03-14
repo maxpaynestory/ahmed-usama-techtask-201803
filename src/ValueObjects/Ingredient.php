@@ -18,6 +18,11 @@ class Ingredient {
 
     protected $title;
 
+    /**
+     * @param string $title Title of ingredient
+     * @param string $bestBefore best before date
+     * @param string $useBy expiry date
+     */
     function __construct($title, $bestBefore, $useBy) {
         
         $this->title = $title;

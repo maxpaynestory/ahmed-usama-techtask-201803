@@ -9,5 +9,8 @@
             "email": "maxpaynestory@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {"RecipeApp\\": "src"}
+    }
 }
