@@ -9,7 +9,9 @@
             "email": "maxpaynestory@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "silex/silex": "~2.0"
+    },
     "autoload": {
         "psr-4": {"RecipeApp\\": "src"}
     }

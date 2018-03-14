@@ -9,6 +9,7 @@
 namespace RecipeApp\Usecases;
 
 use RecipeApp\ValueObjects\Ingredient;
+use RecipeApp\ValueObjects\Recipe;
 
 /**
  * Description of GetRecipes
@@ -20,7 +21,16 @@ class GetRecipes {
         
     }
     
-    function execute(Ingredient $aIngredients, Recipe $aRecipes){
-        
+    /**
+     * @param Ingredient[] $aIngredients Array of ingredient objects
+     * @param Recipe[] $aRecipes Array of recipe objects
+     */
+    function execute(array $aIngredients, array $aRecipes){
+        $nonExpiredIngredients = array_filter($aIngredients, function($item){
+            if($item instanceof Ingredient){
+                return $item->hasNotExpired();
+            }
+            return false;
+        });
     }
 }

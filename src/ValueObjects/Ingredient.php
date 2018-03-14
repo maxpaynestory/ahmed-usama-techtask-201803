@@ -26,7 +26,30 @@ class Ingredient {
     function __construct($title, $bestBefore, $useBy) {
         
         $this->title = $title;
-        $this->bestBefore = $bestBefore;
+        $this->setBestBefore($bestBefore);
+        $this->setUseBy($useBy);
+    }
+    
+    private function setUseBy($useBy) {
+        if (\DateTime::createFromFormat('Y-m-d', $useBy) === FALSE) {
+            throw new \Exception('useBy date is not valid');
+        }
         $this->useBy = $useBy;
     }
+
+    private function setBestBefore($bestBefore) {
+        if (\DateTime::createFromFormat('Y-m-d', $bestBefore) === FALSE) {
+            throw new \Exception('useBy date is not valid');
+        }
+        $this->bestBefore = $bestBefore;
+    }
+    
+    /**
+     * @return bool If ingredient has not expired function will return true otherwise false
+     */
+    public function hasNotExpired() {
+        $exp_date = strtotime($this->useBy . " 23:59:00");
+        return time() < $exp_date;
+    }
+
 }
