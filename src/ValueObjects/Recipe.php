@@ -5,23 +5,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace RecipeApp\ValueObjects;
+
 /**
- * Description of Ingredient
+ * Description of Recipe
  *
  * @author Usama Ahmed Khan
  */
-class Ingredient {
+class Recipe {
 
-    protected $useBy;
-    protected $bestBefore;
-
+    /**
+     * @var array
+     */
+    protected $ingredientTitles;
     protected $title;
 
-    function __construct($title, $bestBefore, $useBy) {
+    function __construct($title, Array $ingredientTitles) {
         
         $this->title = $title;
-        $this->bestBefore = $bestBefore;
-        $this->useBy = $useBy;
+        $this->ingredientTitles = $ingredientTitles;
     }
 }

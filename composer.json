@@ -1,6 +1,8 @@
 {
     "name": "maxpaynestory/recipeapp",
-    "description": "Api to return recipes based on ingredients found inside your fridge considering their expiry",
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
     "authors": [
         {
             "name": "Usama Ahmed",

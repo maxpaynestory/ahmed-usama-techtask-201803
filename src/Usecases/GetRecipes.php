@@ -8,6 +8,8 @@
 
 namespace RecipeApp\Usecases;
 
+use RecipeApp\ValueObjects\Ingredient;
+
 /**
  * Description of GetRecipes
  *
@@ -18,7 +20,7 @@ class GetRecipes {
         
     }
     
-    function execute(Ingredient $aIngredients){
+    function execute(Ingredient $aIngredients, Recipe $aRecipes){
         
     }
 }
