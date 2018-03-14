@@ -8,25 +8,23 @@ A simple Vagrant LAMP setup running PHP7.
 - Vim, Git, Curl, etc.
 - Apache
 - PHP7 with some extensions
-- MySQL 5.6
-- Node.js with NPM
-- RabbitMQ
-- Redis
 - Composer
-- phpMyAdmin
 
 ## Prerequisites
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - Plugin vagrant-vbguest (``vagrant plugin install vagrant-vbguest``)
+- Plugin vagrant-hostmanager ( for adding host entries to etc file)
 
 ## How to use
 
 - Clone this repository into your project
 - Run ``vagrant up``
-- Add the following lines to your hosts file:
+- Add the following lines to your hosts file if hostmanager didn't worked:
 ````
-192.168.100.100 app.local
-192.168.100.100 phpmyadmin.local
+192.168.100.135 recipeapp.vm
 ````
-- Navigate to ``http://app.local/`` 
-- Navigate to ``http://phpmyadmin.local/`` (both username and password are 'root')
+- Recipe end point for ``http://recipeapp.vm/index.php/lunch``
+
+
+## How to test
+ - Run ``vendor/bin/phpunit``
