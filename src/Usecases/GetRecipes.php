@@ -24,16 +24,49 @@ class GetRecipes {
     /**
      * @param Ingredient[] $aIngredients Array of ingredient objects
      * @param Recipe[] $aRecipes Array of recipe objects
+     * @return Recipe[] Array of recipe objects
      */
     function execute(array $aIngredients, array $aRecipes){
-        $nonExpiredIngredients = array_filter($aIngredients, function($item){
+        $expiredNames = [];
+        
+        $nonExpiredIngredients = array_filter($aIngredients, function($item) use (&$expiredNames){
             if($item instanceof Ingredient){
-                return $item->hasNotExpired();
+                $hasNotExpired = $item->hasNotExpired();
+                if(!$hasNotExpired){
+                    array_push($expiredNames, $item->getTitle());
+                }
+                return $hasNotExpired;
             }
-            return false;
+            throw new \Exception("not an instance of Ingredient");
         });
         
-        var_dump($nonExpiredIngredients);
-        die();
+        
+        $recipesWithNonExpiredIngredients = array_filter($aRecipes, function($item1) use ($expiredNames, $aIngredients) {
+            if($item1 instanceof Recipe){
+                foreach($item1->getIngredients() as $ingredientTitle){
+                    if(in_array($ingredientTitle, $expiredNames)){
+                        return false;
+                    }
+                    //////// Add freshness points to recipe ///////////
+                    foreach($aIngredients as $ingredient){
+                        if($ingredient->getTitle() === $ingredientTitle and $ingredient->bestToEat()){
+                            $item1->addFreshPoint();
+                        }
+                    }
+                    ///////////////////////////////////////////////////
+                }
+                return true;
+            }
+            throw new \Exception("not an instance of Recipe");
+        });
+        
+        
+        /// lets sort them based on freshness points ///////
+        usort($recipesWithNonExpiredIngredients,function($first,$second){
+            return $first->getFreshness() < $second->getFreshness();
+        });
+        ////////////////////////////////////////////////////
+        
+        return $recipesWithNonExpiredIngredients;
     }
 }

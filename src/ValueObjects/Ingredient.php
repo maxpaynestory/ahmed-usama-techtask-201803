@@ -51,5 +51,14 @@ class Ingredient {
         $exp_date = strtotime($this->useBy . " 23:59:00");
         return time() < $exp_date;
     }
+    
+    public function bestToEat(){
+        $exp_date = strtotime($this->bestBefore . " 23:59:00");
+        return $exp_date > time();
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
 
 }

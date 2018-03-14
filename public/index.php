@@ -46,9 +46,18 @@ $app->post('/lunch', function (Request $request) use ($app) {
         array_push($ingredients, new \RecipeApp\ValueObjects\Ingredient($recipeArr['title'],$recipeArr['best-before'],$recipeArr['use-by']));
     }
     
-    $getRecipes->execute($ingredients, $recipes);
+    $resultRecipes = $getRecipes->execute($ingredients, $recipes);
     
-    return json_encode(['help'=>'sdads']);
+    $responseArray = [];
+    
+    foreach($resultRecipes as $recipe){
+        array_push($responseArray, [
+            'title'=>$recipe->getTitle(),
+            'ingredients'=>$recipe->getIngredients()
+        ]);
+    }
+    
+    return new \Symfony\Component\HttpFoundation\JsonResponse(['recipes' => $responseArray]);
 });
 
 $app->run();

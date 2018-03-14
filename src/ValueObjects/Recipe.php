@@ -20,10 +20,29 @@ class Recipe {
      */
     protected $ingredientTitles;
     protected $title;
+    protected $freshness;
     
     function __construct($title, Array $ingredientTitles) {
         
         $this->title = $title;
         $this->ingredientTitles = $ingredientTitles;
+        $this->freshness = 0;
     }
+
+    public function getIngredients() {
+        return $this->ingredientTitles;
+    }
+    
+    public function addFreshPoint() {
+        $this->freshness += 1;
+    }
+    
+    function getTitle() {
+        return $this->title;
+    }
+    function getFreshness() {
+        return $this->freshness;
+    }
+
+
 }
