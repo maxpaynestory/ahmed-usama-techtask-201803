@@ -36,4 +36,23 @@ class IngredientTest extends TestCase{
     {
         new Ingredient('Some Title for ingredient','2018-03-25','20-03-2018');
     }
+    
+    function testhasExpired()
+    {
+        $ingredient = new Ingredient('Some Title for ingredient',date("Y-m-d", strtotime('-15 day')),date("Y-m-d", strtotime('-1 day')));
+        $this->assertEquals(false, $ingredient->hasNotExpired());
+        
+        
+        $ingredient = new Ingredient('Some Title for ingredient',date("Y-m-d", strtotime('+15 day')),date("Y-m-d", strtotime('+1 day')));
+        $this->assertEquals(true, $ingredient->hasNotExpired());
+    }
+    
+    function testBestToEat()
+    {
+        $ingredient = new Ingredient('Some Title for ingredient',date("Y-m-d", strtotime('-15 day')),date("Y-m-d", strtotime('-1 day')));
+        $this->assertEquals(false, $ingredient->bestToEat());
+        
+        $ingredient = new Ingredient('Some Title for ingredient',date("Y-m-d", strtotime('+1 day')),date("Y-m-d", strtotime('+20 day')));
+        $this->assertEquals(true, $ingredient->bestToEat());
+    }
 }
