@@ -1,0 +1,11 @@
+{
+    "name": "maxpaynestory/recipeapp",
+    "description": "Api to return recipes based on ingredients found inside your fridge considering their expiry",
+    "authors": [
+        {
+            "name": "Usama Ahmed",
+            "email": "maxpaynestory@gmail.com"
+        }
+    ],
+    "require": {}
+}
