@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :mount_options => ['nolock,vers=3,udp,noatime']
 
     # Do some network configuration
-    config.vm.network "private_network", ip: "192.168.100.100"
+    config.vm.network "private_network", ip: "192.168.100.135"
 
     # Assign a quarter of host memory and all available CPU's to VM
     # Depending on host OS this has to be done differently.
@@ -40,5 +40,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     config.vm.provision :shell, :path => "bootstrap.sh"
+	
+	config.hostmanager.enabled = true
+	  config.hostmanager.manage_host = true
+	  config.hostmanager.manage_guest = true
+	  config.hostmanager.ignore_private_ip = false
+	  config.hostmanager.include_offline = true
+	  config.vm.define 'recipeapp' do |node|
+		node.vm.hostname = 'recipeapp.vm'
+		node.vm.network :private_network, ip: '192.168.100.135'
+	  end
 
 end

@@ -32,5 +32,8 @@ class GetRecipes {
             }
             return false;
         });
+        
+        var_dump($nonExpiredIngredients);
+        die();
     }
 }
